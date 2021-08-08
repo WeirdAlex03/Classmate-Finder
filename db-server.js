@@ -2,9 +2,9 @@
 // Ignore ununsed varible warnings until I start working on this
 // jshint -W098
 
-const Database = require("@replit/database");
+const Database = require("@replit/database"); // lgtm [js/unused-local-variable]
 const https = require("https");
-const url = require("url");
+const url = require("url"); // lgtm [js/unused-local-variable]
 
 /**
  * Creates a webserver with a requestListener function. 
