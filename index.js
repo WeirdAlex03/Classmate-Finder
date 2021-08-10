@@ -1,5 +1,7 @@
-console.log("I have not yet made this portion, but save the link and your PIN for when this is done.")
-console.log("When this is finished, you'll \"sign in\" with your Discord tag and PIN, and then will be able to see your classmates in a format similar to this:")
+require("./db-server.js");
+
+console.log("I have not yet made this portion, but save the link and your PIN for when this is done.");
+console.log("When this is finished, you'll \"sign in\" with your Discord tag and PIN, and then will be able to see your classmates in a format similar to this:");
 console.log(`
 Classmates for [your name here]
 	CSE 199 - B1
@@ -15,5 +17,5 @@ Classmates for [your name here]
 			Name (user#tag), Name (user#tag)
 		Same class (possibly different teacher)
 			Name (user#tag), Name (user#tag), Name (user#tag)
-`)
-console.log("This will eventually also be on a (very basic) website for some (slightly) better formatting, but this is the same information")
+`);
+console.log("This will eventually also be on a (very basic) website for some (slightly) better formatting, but this is the same information");
