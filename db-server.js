@@ -1,10 +1,9 @@
-
 // Ignore ununsed varible warnings until I start working on this
 // jshint -W098
 
 const Database = require("@replit/database"); // lgtm [js/unused-local-variable]
-const https = require("https");
-const url = require("url"); // lgtm [js/unused-local-variable]
+const http = require("http");
+const url = require("url");
 
 /**
  * Creates a webserver with a requestListener function. 
@@ -16,8 +15,13 @@ const url = require("url"); // lgtm [js/unused-local-variable]
  * @param {IncomingMessage} req - The request recieved by the server
  * @param {ServerResponse}  res - The response sent back by the server
  */
-https.createServer(function (req, res) {
+http.createServer(function (req, res) {
 	//todo
+	var q = url.parse(req.url, true).query;
+	console.log(q);
+
+	res.write("active");
+	res.end();
 }).listen(8080);
 
 console.log("Webserver active");
