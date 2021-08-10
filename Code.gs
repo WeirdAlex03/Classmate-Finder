@@ -15,7 +15,7 @@ function createFormTrigger() {	//jshint ignore:line
 		existingTrigger = triggers[i];
 		break;
 	}
-	}
+	}	
 	if (!existingTrigger) {
 	var trigger = ScriptApp.newTrigger('onSubmit')	//jshint ignore:line
 		.forForm(form)
@@ -31,16 +31,16 @@ function createFormTrigger() {	//jshint ignore:line
  *      see https://developers.google.com/apps-script/guides/triggers/events#google_forms_events.
  */
 function onSubmit(e) {	//jshint ignore:line 
-if (e.authMode !== ScriptApp.AuthMode.FULL) {
-	console.error("Permission level is not FULL");
-}
+	if (e.authMode !== ScriptApp.AuthMode.FULL) {
+		console.error("Permission level is not FULL");
+	}
 
-var responses = {};
-for (var response of e.response.getItemResponses()) {
-	Logger.log(response.getItem().getTitle() + ": " + response.getResponse());
-	responses[response.getItem().getTitle()] = response.getResponse();
-}
-postToDB(responses);
+	var responses = {};
+	for (var response of e.response.getItemResponses()) {
+		Logger.log(response.getItem().getTitle() + ": " + response.getResponse());
+		responses[response.getItem().getTitle()] = response.getResponse();
+	}
+	postToDB(responses);
 
 }
 
@@ -51,17 +51,19 @@ postToDB(responses);
  * @param {Object} payload - The object to send to the DB
  */
 function postToDB(payload) {
-var BASE_URL = 'https://classmate-finder.weirdalex03.repl.co/post';
+	var BASE_URL = 'https://classmate-finder.weirdalex03.repl.co/post';
 
-var options = {
-	'method' : 'post',
-};
-var url = BASE_URL + "?";
+	var options = {
+		'method' : 'post',
+	};
+	var url = BASE_URL + "?";
 
-for (var property in payload) {
-	console.log(`${property}=${payload[property]}&`);
-	url += `${property}=${payload[property]}&`;
-}
+	for (var property in payload) {
+		console.log(`${property}=${payload[property]}&`);
+		url += `${encodeURIComponent(property)}=${encodeURIComponent(payload[property])}&`;
+	}
 
-UrlFetchApp.fetch(url, options);
+	console.log(url);
+	UrlFetchApp.fetch(url, options);
+
 }
