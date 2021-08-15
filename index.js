@@ -1,5 +1,7 @@
 require("./db-server.js");
 
+/* eslint-disable max-len  -- Ignore until I get to actually working on this file*/
+
 console.log("I have not yet made this portion, but save the link and your PIN for when this is done.");
 console.log("When this is finished, you'll \"sign in\" with your Discord tag and PIN, and then will be able to see your classmates in a format similar to this:");
 console.log(`
