@@ -87,10 +87,19 @@ function onSubmit(e) {
 	/** @type {ItemResponse[]} */
 	var responses = {};
 
-	// Loads the form responses into an object
+	/** @type {number} */
+	var numClasses;
+
+	// Loads the form responses into an object & count "Class" questions
 	for (var response of e.response.getItemResponses()) {
 		responses[response.getItem().getTitle()] = response.getResponse();
+		if (response.getItem().getTitle() === "Class") {
+			numClasses++;
+		}
 	}
+
+	// Add number of class questions to the payload
+	responses["Class Entries"] = numClasses;
 
 	// Sends the responses to the database server
 	postToDB(responses);

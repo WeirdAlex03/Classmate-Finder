@@ -15,13 +15,6 @@ const http = require("http");
 const url = require("url");
 
 /**
- * Number of "Class n" questions on the Form
- * @constant {number}
- * @default
- */
-const NUM_CLASS_ENTERIES = 10;
-
-/**
  * Creates a new User object
  * @class
  * @classdesc Represents a user of the program. This is where the
@@ -62,12 +55,15 @@ http.createServer((req, res) => {
 	 * @todo Only proceed if it is a Form response submission
 	 */
 
+	/** @type {number} */
+	const numClassEntries = parseInt(qData["Class Entries"], 10);
+
 	/**
 	 * Array of the user's classes to be added to the database
 	 * @type {Object[]}
 	 */
 	var classes = [];
-	for (var i = 1; i <= NUM_CLASS_ENTERIES; i++) {
+	for (var i = 1; i <= numClassEntries; i++) {
 		if (qData[`Class ${i}`]) {
 			/** 
 			 * Full class code as provided by the user, with
