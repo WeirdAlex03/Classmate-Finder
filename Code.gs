@@ -33,7 +33,7 @@ function createFormTrigger() {
  * @param {Object} payload - The object to send to the DB
  */
 function postToDB(payload) {
-	var BASE_URL = "https://classmate-finder.weirdalex03.repl.co/post";
+	const BASE_URL = "https://Classmate-Finder-Database.weirdalex03.repl.co/form";
 
 	var options = {
 		method: "post",
