@@ -34,10 +34,6 @@
             "error",
             { "allowAsStatement": true }
         ],
-        "no-plusplus": [
-            "error",
-            { "allowForLoopAfterthoughts": true }
-        ],
         "id-length": [
             "error",
             { "exceptions": ["e", "i", "j", "k"] }
@@ -79,12 +75,12 @@
         "no-useless-concat": "warn",
         "space-infix-ops": "warn",
         "space-in-parens": "warn",
-		"keyword-spacing": "warn",
-		"newline-per-chained-call": "warn",
-		"multiline-comment-style": "warn",
-		"arrow-parens": "warn",
-		"sort-vars": "warn",
-		"eol-last": "warn",
+        "keyword-spacing": "warn",
+        "newline-per-chained-call": "warn",
+        "multiline-comment-style": "warn",
+        "arrow-parens": "warn",
+        "sort-vars": "warn",
+        "eol-last": "warn",
         "dot-location": [
             "warn",
             "property"
@@ -109,18 +105,22 @@
             "warn",
             "all"
         ],
-		"array-element-newline": [
-			"warn",
-			"consistent"
-		],
-		"array-bracket-spacing": [
-			"warn",
-			"never"
-		],
+        "array-element-newline": [
+            "warn",
+            "consistent"
+        ],
+        "array-bracket-spacing": [
+            "warn",
+            "never"
+        ],
+        "array-bracket-newline": [
+            "warn",
+            { "multiline": true }
+        ],
         "no-inline-comments": [
-			"warn",
-			{ "ignorePattern": "lgtm|jshint" }
-		],
+            "warn",
+            { "ignorePattern": "lgtm|jshint" }
+        ],
         "no-tabs": [
             "warn",
             { "allowIndentationTabs": true }
@@ -129,11 +129,11 @@
             "warn",
             { "ignoreComments": true }
         ],
-		"capitalized-comments": [
-			"warn",
-			"always",
-			{ "ignorePattern": "lgtm" }
-		],
+        "capitalized-comments": [
+            "warn",
+            "always",
+            { "ignorePattern": "lgtm" }
+        ],
         "brace-style": [
             "warn",
             "stroustrup",
@@ -185,12 +185,13 @@
         ],
 
         "prefer-template": "off",
-		"init-declarations": "off",
+        "init-declarations": "off",
         "no-var": "off",
         "no-else-return": "off",
         "no-ternary": "off",
         "no-console": "off",
-		"sort-keys": "off",
+        "no-plusplus": "off",
+        "sort-keys": "off",
         "function-call-argument-newline": "off",
         "padded-blocks": "off",
         "max-params": "off",
