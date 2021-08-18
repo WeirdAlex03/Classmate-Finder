@@ -56,7 +56,18 @@
         "no-magic-numbers": [
             "error",
             {
-                "ignore": [0, 1, 10, 100, 1000, 24, 60, 60000, 8080],
+                "ignore": [
+                    // Common numbers
+                    0, 1,
+                    // Factors of 10
+                    10, 100, 1000, 10000, 100000, 1000000, 10000000,
+                    // Time units
+                    24, 60, 60000,
+                    // HTTP ports
+                    80, 8008, 8080,
+                    // Common HTTP response codes
+                    200, 201, 202, 400, 401, 403, 404, 500, 501, 503
+                ],
                 "ignoreArrayIndexes": true,
                 "ignoreDefaultValues": true
             }
