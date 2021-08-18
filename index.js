@@ -1,5 +1,3 @@
-require("./db-server.js");
-
 /* eslint-disable max-len  -- Ignore until I get to actually working on this file*/
 
 console.log("I have not yet made this portion, but save the link and your PIN for when this is done.");
