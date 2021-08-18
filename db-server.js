@@ -1,6 +1,3 @@
-// Ignore ununsed varible warnings until I start working on this
-// jshint -W098
-
 /**
  * Represents a class of a {@link User}
  * @typedef {Object} UserClass
@@ -10,7 +7,7 @@
  *                                 recitation, ie "1". Is "" if not specified
  */
 
-const Database = require("@replit/database");
+// Imports
 const http = require("http");
 const url = require("url");
 
@@ -49,18 +46,57 @@ http.createServer((req, res) => {
 	console.log(qData);
 
 	res.write("active");
-	res.end();
 
-	/**
-	 * @todo Only proceed if it is a Form response submission
-	 */
+	if (req.method === "POST" && req.url.pathname === "/form") {
+		/**
+		 * If POST request to "/form", add data to DB
+		 * These requests come from the Form program
+		 */
+		try {
+			addClassToDB(qData);
+			res.writeHead(201);
+		}
+		catch (e) {
+			res.writeHead(400, e.name + ": " + e.message);
+			console.log(e);
+		}
+	}
+	else if (req.method === "GET" && req.url.pathname === "/") {
+		/**
+		 * If GET request to "/", tell user to go to main project. These
+		 * requests come opening the project on Replit, and the database
+		 * project will not allow the user to view classes.
+		 */
+		res.writeHead(200, { "Content-Type": "text/plain" });
+		res.write("This project only serves as the databse server.");
+		res.write("Please visit the main project at https://replit.com/@WeirdAlex03/Classmate-Finder");
+	}
+
+	res.end();
+}).listen(8080);
+
+console.log("Webserver active");
+
+/**
+ * Adds the class to the database
+ * @param {Object} qData - The query data from the URL request
+ * @throws {Error} If any problem is encountered
+ */
+async function addClassToDB(qData) {
+
+	const Database = require("@replit/database");
+	const db = new Database();
+	const { validateFormData } = require("./ValidateFormData.js");
+
+	/** Validate the data from the form */
+	validateFormData(qData);
 
 	/** @type {number} */
 	const numClassEntries = parseInt(qData["Class Entries"], 10);
 
 	/**
 	 * Array of the user's classes to be added to the database
-	 * @type {Object[]}
+	 * @type {UserClass[]}
 	 */
 	var classes = [];
 	for (var i = 1; i <= numClassEntries; i++) {
@@ -90,15 +126,14 @@ http.createServer((req, res) => {
 		}
 	}
 
+	/** @type {User} */
 	var user = new User(
 		qData["Your name"],
 		qData["Discord Tag"],
 		qData["PIN - at least 4 digits"],
 		classes
 	);
+
 	console.log(user);
-	Database.set(user.tag, user);
-
-}).listen(8080);
-
-console.log("Webserver active");
+	await db.set(user.tag, user);
+}
