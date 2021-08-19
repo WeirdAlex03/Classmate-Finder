@@ -88,7 +88,7 @@ function onSubmit(e) {
 	var responses = {};
 
 	/** @type {number} */
-	var numClasses;
+	var numClasses = 0;
 
 	// Loads the form responses into an object & count "Class" questions
 	for (var response of e.response.getItemResponses()) {
