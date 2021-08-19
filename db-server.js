@@ -43,11 +43,8 @@ class User {
 http.createServer((req, res) => {
 	/** @type {Object} */
 	var qData = url.parse(req.url, true).query;
-	console.log(qData);
 
-	res.write("active");
-
-	if (req.method === "POST" && req.url.pathname === "/form") {
+	if (req.method === "POST" && req.url === "/form") {
 		/**
 		 * If POST request to "/form", add data to DB
 		 * These requests come from the Form program
@@ -61,14 +58,14 @@ http.createServer((req, res) => {
 			console.log(e);
 		}
 	}
-	else if (req.method === "GET" && req.url.pathname === "/") {
+	else if (req.method === "GET" && req.url === "/") {
 		/**
 		 * If GET request to "/", tell user to go to main project. These
 		 * requests come opening the project on Replit, and the database
 		 * project will not allow the user to view classes.
 		 */
 		res.writeHead(200, { "Content-Type": "text/plain" });
-		res.write("This project only serves as the databse server.");
+		res.write("This project only serves as the databse server.\n\n");
 		res.write("Please visit the main project at https://replit.com/@WeirdAlex03/Classmate-Finder");
 	}
 
