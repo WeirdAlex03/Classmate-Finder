@@ -137,7 +137,7 @@
         ],
         "brace-style": [
             "warn",
-            "stroustrup",
+            "1tbs",
             { "allowSingleLine": true }
         ],
         "quote-props": [

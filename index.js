@@ -71,8 +71,7 @@ function makeMenu(menu) {
 		if (isNaN(answer) || answer < 0 || answer >= menu.length) {
 			console.log("Invalid choice!");
 			makeMenu(menu);
-		}
-		else {
+		} else {
 			menu[answer].func();
 		}
 	});

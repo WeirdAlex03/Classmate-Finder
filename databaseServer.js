@@ -52,13 +52,11 @@ http.createServer((req, res) => {
 		try {
 			addClassToDB(qData);
 			res.writeHead(201);
-		}
-		catch (e) {
+		} catch (e) {
 			res.writeHead(400, e.name + ": " + e.message);
 			console.log(e);
 		}
-	}
-	else if (req.method === "GET" && req.url === "/") {
+	} else if (req.method === "GET" && req.url === "/") {
 		/**
 		 * If GET request to "/", tell user to go to main project. These
 		 * requests come opening the project on Replit, and the database
