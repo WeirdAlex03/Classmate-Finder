@@ -192,6 +192,8 @@
         "no-ternary": "off",
         "no-console": "off",
         "no-plusplus": "off",
+        "no-warning-comments": "off",
+        "object-property-newline": "off",
         "sort-keys": "off",
         "function-call-argument-newline": "off",
         "padded-blocks": "off",
