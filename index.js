@@ -29,40 +29,53 @@ const rl = readline.createInterface({
 	output: process.stdout
 });
 
-// Header
-console.log(" ≡≡≡ Welcome to Classmate Finder! ≡≡≡ ");
-console.log(" ========== Version: InDev ========== ");
-console.log(" ------ Created by WeirdAlex03 ------ ");
-console.log("");
+// On start
+displayHeader();
+displayTopMenu();
 
-// Top menu
-/** @type MenuItem[] */
-const topMenu = [
-	{ name: "Find classmates", func: findClassmates },
-	{ name: "Add classmates", func: displayFormLink },
-	{ name: "About", func: displayAbout },
-];
-console.log("What would you like to do?");
-displayMenu(topMenu);
-rl.question("Choice: ", (input) => {
-	/** @type {Number} */
-	const answer = parseInt(input, 10) - 1;
-	if (isNaN(answer) || answer < 0 || answer >= topMenu.length) {
-		console.log("Invalid choice!");
-	}
-	else {
-		topMenu[answer].func();
-	}
-});
+/** Displays the header */
+function displayHeader() {
+	console.log(" ≡≡≡ Welcome to Classmate Finder! ≡≡≡ ");
+	console.log(" ========== Version: InDev ========== ");
+	console.log(" ------ Created by WeirdAlex03 ------ ");
+}
+
+/** Displays the top-level menu */
+function displayTopMenu() {
+	/** @type MenuItem[] */
+	const topMenu = [
+		{ name: "Find classmates", func: findClassmates },
+		{ name: "Add classes", func: displayFormLink },
+		{ name: "About", func: displayAbout },
+		{ name: "Exit", func: exit }
+	];
+	console.log("");
+	console.log("What would you like to do?");
+	makeMenu(topMenu);
+}
 
 /**
- * Displays a string array as a menu
+ * Makes a menu and prompts user to select an item. If the item is valid, the
+ * function associated with that item is called. Otherwise, it asks again.
  * @param {MenuItem[]} menu - The menu to display
  */
-function displayMenu(menu) {
+function makeMenu(menu) {
 	for (var i = 0; i < menu.length; i++) {
 		console.log(` ${i + 1}. ${menu[i].name}`);
 	}
+	rl.question("Choice: ", (input) => {
+		console.log("");
+
+		/** @type {Number} */
+		const answer = parseInt(input, 10) - 1;
+		if (isNaN(answer) || answer < 0 || answer >= menu.length) {
+			console.log("Invalid choice!");
+			makeMenu(menu);
+		}
+		else {
+			menu[answer].func();
+		}
+	});
 }
 
 /**
@@ -72,30 +85,26 @@ function displayMenu(menu) {
  */
 function findClassmates() {
 	console.error("Not implemented yet!");
+	displayTopMenu();
 }
 
-/**
- * Displays the link to the form to submit your class
- */
+/** Displays the link to the form to submit classes */
 function displayFormLink() {
 	console.log("To add your classes to the database, please go to");
 	console.log("https://forms.gle/xHCtedWDv1tznBoT9");
+
+	displayTopMenu();
 }
 
-/**
- * Displays the about page
- */
+/** Displays the about page */
 function displayAbout() {
-	console.log("\n");
-	console.log("About");
-	console.log("=====");
 	console.log("Classmate Finder");
 	console.log("By WeirdAlex03");
 	console.log("");
-	console.log("This program is a tool to help you find and reach out to");
-	console.log("your classmates before classes start. Fill out your classes,");
-	console.log("invite all your friends to do the same, and then use this");
-	console.log("program to find everyone who shares a class with you!");
+	console.log("A tool to help you find and reach out to your classmates");
+	console.log("before classes start. Fill out your classes, invite all your");
+	console.log("friends to do the same, and then use this program to find");
+	console.log("everyone who shares a class with you!");
 	console.log("");
 	console.log("Big changes are planned for the next semester, so keep an");
 	console.log("the project! You can see the plans on the TODO project board");
@@ -106,4 +115,12 @@ function displayAbout() {
 	console.log("");
 	console.log("View source and report problems:");
 	console.log("https://github.com/WeirdAlex03/Classmate-Finder");
+
+	displayTopMenu();
+}
+
+/** Exits the program */
+function exit() {
+	console.log("Goodbye!\n");
+	process.exit(0);
 }
