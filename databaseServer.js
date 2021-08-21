@@ -77,8 +77,7 @@ console.log("Webserver active");
  * @param {Object} qData - The query data from the URL request
  * @throws {Error} If any problem is encountered
  */
-async function addClassToDB(qData) {
-
+function addClassToDB(qData) {
 	const Database = require("@replit/database");
 	const db = new Database();
 	const { validateFormData } = require("./ValidateFormData.js");
@@ -112,12 +111,12 @@ async function addClassToDB(qData) {
 			var classCodeSections = classCode.match(/(?<code>[A-Z]{2,3} [0-9]{3})[A-Z]* - (?<section>[A-Z]+)(?<subsection>[0-9]*)/u);
 
 			/** @type {UserClass} */
-			var classObj = {
+			const userClass = {
 				code: classCodeSections.groups.code,
 				section: classCodeSections.groups.section,
 				subsection: classCodeSections.groups.subsection,
 			};
-			classes.push(classObj);
+			classes.push(userClass);
 		}
 	}
 
@@ -129,6 +128,28 @@ async function addClassToDB(qData) {
 		classes
 	);
 
+	/**
+	 * A student for the classes in the database
+	 * @typedef {Object} Student
+	 * @property {string} name - The name of the student
+	 * @property {string} tag - The Discord tag of the student
+	 */
+
+	/** @type {Student} */
+	const student = { name: user.name, tag: user.tag };
+
+	// Add user to the database as a student of each class
+	for (const userClass in user.classes) {
+		db.get(userClass.code).then((result) => {
+			if (result && result[userClass.section][userClass.subsection]) {
+				result.push(student);
+			} else {
+				result[userClass.section][userClass.subsection] = [student];
+			}
+			db.set(userClass.code, result);
+		});
+	}
+
 	console.log(user);
-	await db.set(user.tag, user);
+	db.set(user.tag, user);
 }
