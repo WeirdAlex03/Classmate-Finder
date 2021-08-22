@@ -33,42 +33,6 @@ function createFormTrigger() {
 }
 
 /**
- * Sends a POST request to the database server. I couldn't figure out how to
- * read it when it's an actual payload so it's just converted to URL paramters
- * 
- * @param {Object} payload - The object to send to the DB
- */
-function postToDB(payload) {
-	/**
-	 * The domain and path of the database server 
-	 * @type {string}
-	 */
-	const BASE_URL = "https://Classmate-Finder-Database.weirdalex03.repl.co/form";
-
-	/** 
-	 * Additional parameters for the request; sets the method to POST
-	 * @type {Object}
-	 */
-	const options = { method: "post" };
-
-	/** 
-	 * The full URL of the request with the payload encoded as paramaters
-	 * @type {string} 
-	 */
-	var url = BASE_URL + "?";
-
-	// Adds each property to the URL as a parameter
-	for (var property in payload) {
-		url += encodeURIComponent(property) + "="
-		     + encodeURIComponent(payload[property]) + "&";
-	}
-
-	// Sends POST request to the database server with the payload as parameters
-	UrlFetchApp.fetch(url, options);
-
-}
-
-/**
  * Send data to database server
  * 
  * @param {Object} e - The event parameter created by a form submission;
@@ -103,5 +67,41 @@ function onSubmit(e) {
 
 	// Sends the responses to the database server
 	postToDB(responses);
+
+}
+
+/**
+ * Sends a POST request to the database server. I couldn't figure out how to
+ * read it when it's an actual payload so it's just converted to URL paramters
+ * 
+ * @param {Object} payload - The object to send to the DB
+ */
+function postToDB(payload) {
+	/**
+	 * The domain and path of the database server 
+	 * @type {string}
+	 */
+	const BASE_URL = "https://Classmate-Finder-Database.weirdalex03.repl.co/form";
+
+	/** 
+	 * Additional parameters for the request; sets the method to POST
+	 * @type {Object}
+	 */
+	const options = { method: "post" };
+
+	/** 
+	 * The full URL of the request with the payload encoded as paramaters
+	 * @type {string} 
+	 */
+	var url = BASE_URL + "?";
+
+	// Adds each property to the URL as a parameter
+	for (var property in payload) {
+		url += encodeURIComponent(property) + "="
+		     + encodeURIComponent(payload[property]) + "&";
+	}
+
+	// Sends POST request to the database server with the payload as parameters
+	UrlFetchApp.fetch(url, options);
 
 }
