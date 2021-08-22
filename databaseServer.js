@@ -56,6 +56,42 @@ http.createServer((req, res) => {
 			res.writeHead(400, e.name + ": " + e.message);
 			console.log(e);
 		}
+	} else if (req.method === "GET" && req.url === "/check") {
+		/**
+		 * If GET request to "/check", check if user exists in DB
+		 * These requests come from the frontend
+		 */
+		try {
+			if (checkForUser(qData)) {
+				res.writeHead(202);
+			} else {
+				res.writeHead(404);
+			}
+		} catch (e) {
+			res.writeHead(400, e.name + ": " + e.message);
+		}
+	} else if (req.method === "GET" && req.url === "/get") {
+		/**
+		 * If GET request to "/get", get user from DB
+		 * These requests come from the frontend
+		 */
+		try {
+			checkPIN(qData).then((correct) => {
+				if (correct) {
+					getUserClasses(qData).then((user) => {
+						res.writeHead(200, {
+							"Content-Type": "application/json"
+						});
+						res.write(JSON.stringify(user));
+					});
+				} else {
+					res.writeHead(403);
+					res.write("Incorrect PIN");
+				}
+			});
+		} catch (e) {
+			res.writeHead(400, e.name + ": " + e.message);
+		}
 	} else if (req.method === "GET" && req.url === "/") {
 		/**
 		 * If GET request to "/", tell user to go to main project. These
@@ -152,4 +188,61 @@ function addClassToDB(qData) {
 
 	console.log(user);
 	db.set(user.tag, user);
+}
+
+/**
+ * Checks if the given user exists in the database
+ * @param {Object} qData - The query data from the URL request w/ the tag
+ * @returns {Boolean} Whether or not the user exists (true if yes)
+ */
+function checkForUser(qData) {
+	const Database = require("@replit/database");
+	const db = new Database();
+
+	db.get(qData["Discord Tag"]).then((user) => {
+		if (user) {
+			return true;
+		} else {
+			return false;
+		}
+	});
+}
+
+/**
+ * Checks if the correct PIN was provided
+ * @param {Object} qData - The query data from the URL request w/ tag and PIN
+ * @returns {Boolean} Whether or not the PIN is correct 
+ */
+function checkPIN(qData) {
+	const Database = require("@replit/database");
+	const db = new Database();
+
+	db.get(qData["Discord Tag"]).then((user) => {
+		if (user.pin === qData["PIN - at least 4 digits"]) {
+			return true;
+		} else {
+			return false;
+		}
+	});
+}
+
+/** 
+ * Gets the user's classes from the database
+ * @param {Object} qData - The query data from the URL request w/ tag
+ */
+function getUserClasses(qData) {
+	const Database = require("@replit/database");
+	const db = new Database();
+
+	/** @type {Object} */
+	var allClasses = {};
+
+	db.get(qData["Discord Tag"]).then((user) => {
+		for (const userClass in user.classes) {
+			db.get(userClass.code).then((result) => {
+				allClasses[userClass.code] = result;
+			});
+		}
+		return allClasses;
+	});
 }

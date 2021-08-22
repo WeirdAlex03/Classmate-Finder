@@ -23,11 +23,16 @@
  */
 
 // Imports
+const http = require("http");
 const readline = require("readline");
 const rl = readline.createInterface({
 	input: process.stdin,
 	output: process.stdout
 });
+
+// Constants
+const FORM_URL = "https://forms.gle/xHCtedWDv1tznBoT9";
+const DB_URL = "https://Classmate-Finder-Database.weirdalex03.repl.co";
 
 // On start
 displayHeader();
@@ -80,17 +85,70 @@ function makeMenu(menu) {
 /**
  * Prompts user to "sign in" with Discord tag and PIN,
  * then queries database for classes displays calssmates
- * @todo
  */
 function findClassmates() {
-	console.error("Not implemented yet!");
-	displayTopMenu();
+	/** @type {String} */
+	var tag;
+
+	// Prompt for Discord tag, check if in DB
+	rl.question("What is your Discord tag: ", (input) => {
+		http.get({
+			host: DB_URL,
+			path: "/check" + encodeURIComponent("Discord Tag") + "="
+			    + encodeURIComponent(input),
+			port: 8080
+		}, (res) => {
+			if (res.statusCode === 404) {
+				console.log(`Could not find ${input} in the database.`);
+				console.log("Please use the same tag you used on the form.");
+				displayFormLink();
+			} else if (res.statusCode === 202) {
+				tag = input;
+			} else {
+				console.log("Unexpected error in DB call: " + res.statusCode
+				           + " " + http.STATUS_CODES[res.statusCode]);
+				displayTopMenu();
+			}
+		});
+	});
+
+	// Discord tag was found, prompt for PIN
+	rl.question("What is your PIN: ", (input) => {
+		http.get({
+			host: DB_URL,
+			path: "/get" + encodeURIComponent("Discord Tag") + "="
+			    + encodeURIComponent(tag) + "&"
+				+ encodeURIComponent("PIN - at least 4 digits") + "="
+				+ encodeURIComponent(input),
+			port: 8080
+		}, (res) => {
+			if (res.statusCode === 202) {
+				displayClassmates(JSON.parse(res.body));
+			} else if (res.statusCode === 404) {
+				console.log(`Could not find ${input} in the database.`);
+				console.log("Please use the same tag you used on the form.");
+				displayFormLink();
+			} else {
+				console.log("Unexpected error in DB call: " + res.statusCode
+				           + " " + http.STATUS_CODES[res.statusCode]);
+			}
+		});
+	});
+}
+
+/**
+ * Displays all the classmates a user has
+ * @param {Object} classes - The classes from the database
+ * @todo
+ */
+function displayClassmates(classes) {
+	console.log(classes);
 }
 
 /** Displays the link to the form to submit classes */
 function displayFormLink() {
 	console.log("To add your classes to the database, please go to");
-	console.log("https://forms.gle/xHCtedWDv1tznBoT9");
+	console.log(FORM_URL);
 
 	displayTopMenu();
 }
