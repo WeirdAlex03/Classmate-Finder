@@ -15,13 +15,15 @@ program to find everyone who shares a class with you!
 
 ## Usage
 
-This program has not yet been generalized for public use. Please wait until
-version 1.1.0, when I plan to make this more useable for the general public.
+This program has not yet been generalized for public use. I plan to make
+this more useable for the general public in an upcoming minor update and
+will provide more info then.
 
 ## Installation
 
 I cannot currently reccommend that you duplicate this for your own use.
-Please wait until version 1.1.0, when I plan to make the process much easier.
+I plan to make the process much easier in an upcoming minor update and
+will provide more info then.
 
 ## Contributing
 
