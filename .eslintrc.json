@@ -77,7 +77,6 @@
         "space-infix-ops": "warn",
         "space-in-parens": "warn",
         "keyword-spacing": "warn",
-        "newline-per-chained-call": "warn",
         "multiline-comment-style": "warn",
         "arrow-parens": "warn",
         "sort-vars": "warn",
@@ -113,6 +112,10 @@
         "array-bracket-spacing": [
             "warn",
             "never"
+        ],
+        "newline-per-chained-call": [
+            "warn",
+            { "ignoreChainWithDepth": 3 }
         ],
         "array-bracket-newline": [
             "warn",
