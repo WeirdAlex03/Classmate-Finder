@@ -177,8 +177,10 @@ function addClassToDB(qData) {
 	// Add user to the database as a student of each class
 	for (const userClass in user.classes) {
 		db.get(userClass.code).then((result) => {
-			if (result && result[userClass.section][userClass.subsection]) {
-				result.push(student);
+			if (result && result[userClass.section][userClass.subsection]
+				&& !result[userClass.section][userClass.subsection]
+				   .includes(student)) {
+				result[userClass.section][userClass.subsection].push(student);
 			} else {
 				result[userClass.section][userClass.subsection] = [student];
 			}
