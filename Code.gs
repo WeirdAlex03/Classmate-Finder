@@ -57,7 +57,7 @@ function onSubmit(e) {
 	// Loads the form responses into an object & count "Class" questions
 	for (var response of e.response.getItemResponses()) {
 		responses[response.getItem().getTitle()] = response.getResponse();
-		if (response.getItem().getTitle() === "Class") {
+		if (response.getItem().getTitle().startsWith("Class ")) {
 			numClasses++;
 		}
 	}

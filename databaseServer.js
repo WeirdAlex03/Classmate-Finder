@@ -44,7 +44,7 @@ http.createServer((req, res) => {
 	/** @type {Object} */
 	var qData = url.parse(req.url, true).query;
 
-	if (req.method === "POST" && req.url === "/form") {
+	if (req.method === "POST" && req.url.startsWith("/form")) {
 		/**
 		 * If POST request to "/form", add data to DB
 		 * These requests come from the Form program
@@ -53,10 +53,11 @@ http.createServer((req, res) => {
 			addClassToDB(qData);
 			res.writeHead(201);
 		} catch (e) {
-			res.writeHead(400, e.name + ": " + e.message);
-			console.log(e);
+			res.writeHead(400);
+			res.write(e.name + ": " + e.message);
+			console.error(e);
 		}
-	} else if (req.method === "GET" && req.url === "/check") {
+	} else if (req.method === "GET" && req.url.startsWith("/check")) {
 		/**
 		 * If GET request to "/check", check if user exists in DB
 		 * These requests come from the frontend
@@ -68,9 +69,11 @@ http.createServer((req, res) => {
 				res.writeHead(404);
 			}
 		} catch (e) {
-			res.writeHead(400, e.name + ": " + e.message);
+			res.writeHead(400);
+			res.write(e.name + ": " + e.message);
+			console.error(e);
 		}
-	} else if (req.method === "GET" && req.url === "/get") {
+	} else if (req.method === "GET" && req.url.startsWith("/get")) {
 		/**
 		 * If GET request to "/get", get user from DB
 		 * These requests come from the frontend
@@ -90,9 +93,11 @@ http.createServer((req, res) => {
 				}
 			});
 		} catch (e) {
-			res.writeHead(400, e.name + ": " + e.message);
+			res.writeHead(400);
+			res.write(e.name + ": " + e.message);
+			console.error(e);
 		}
-	} else if (req.method === "GET" && req.url === "/") {
+	} else if (req.method === "GET" && req.url.startsWith("/")) {
 		/**
 		 * If GET request to "/", tell user to go to main project. These
 		 * requests come opening the project on Replit, and the database
@@ -116,7 +121,7 @@ console.log("Webserver active");
 function addClassToDB(qData) {
 	const Database = require("@replit/database");
 	const db = new Database();
-	const { validateFormData } = require("./ValidateFormData.js");
+	const validateFormData = require("./validateFormData.js");
 
 	/** Validate the data from the form */
 	validateFormData(qData);
@@ -175,20 +180,22 @@ function addClassToDB(qData) {
 	const student = { name: user.name, tag: user.tag };
 
 	// Add user to the database as a student of each class
-	for (const userClass in user.classes) {
+	for (const userClass of user.classes) {
 		db.get(userClass.code).then((result) => {
 			if (result && result[userClass.section][userClass.subsection]
 				&& !result[userClass.section][userClass.subsection]
 				   .includes(student)) {
 				result[userClass.section][userClass.subsection].push(student);
 			} else {
+				// eslint-disable-next-line no-param-reassign
+				result = {};
+				result[userClass.section] = {};
 				result[userClass.section][userClass.subsection] = [student];
 			}
 			db.set(userClass.code, result);
 		});
 	}
 
-	console.log(user);
 	db.set(user.tag, user);
 }
 
@@ -201,13 +208,15 @@ function checkForUser(qData) {
 	const Database = require("@replit/database");
 	const db = new Database();
 
-	db.get(qData["Discord Tag"]).then((user) => {
+	/** @type {Boolean} */
+	var found = false;
+
+	db.get(encodeURIComponent(qData["Discord Tag"])).then((user) => {
 		if (user) {
-			return true;
-		} else {
-			return false;
+			found = true;
 		}
 	});
+	return found;
 }
 
 /**
@@ -219,7 +228,7 @@ function checkPIN(qData) {
 	const Database = require("@replit/database");
 	const db = new Database();
 
-	db.get(qData["Discord Tag"]).then((user) => {
+	db.get(encodeURIComponent(qData["Discord Tag"])).then((user) => {
 		if (user.pin === qData["PIN - at least 4 digits"]) {
 			return true;
 		} else {
@@ -239,7 +248,7 @@ function getUserClasses(qData) {
 	/** @type {Object} */
 	var allClasses = {};
 
-	db.get(qData["Discord Tag"]).then((user) => {
+	db.get(encodeURIComponent(qData["Discord Tag"])).then((user) => {
 		for (const userClass in user.classes) {
 			db.get(userClass.code).then((result) => {
 				allClasses[userClass.code] = result;

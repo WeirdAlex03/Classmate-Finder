@@ -20,31 +20,31 @@ class ValidationError extends Error {
  * @param {Object} data - The data to be checked for the database
  * @throws {ValidationError} If the data is invalid
  */
-export function validateFormData(data) {
+module.exports = function validateFormData(qData) {
 	/** @type {string[]} */
 	const reqFields = [
 		"Your name",
 		"Discord Tag",
 		"PIN - at least 4 digits",
-		"Class Questions"
+		"Class Entries"
 	];
 
 	// Check that all necessary fields are filled in
 	for (const field of reqFields) {
-		if (!data[field]) {
+		if (!qData[field]) {
 			throw new ValidationError(`Missing ${field}`);
 		}
 	}
 
 	/** @type {number} */
-	const numClassEntries = parseInt(data["Class Entries"], 10);
+	const numClassEntries = parseInt(qData["Class Entries"], 10);
 
 	/** @type {number} */
 	var numClassesFilled = 0;
 
 	// Check that all classes are valid
 	for (var i = 1; i <= numClassEntries; i++) {
-		if (data[`Class ${i}`]) {
+		if (qData[`Class ${i}`]) {
 			numClassesFilled++;
 
 			/** 
@@ -54,7 +54,7 @@ export function validateFormData(data) {
 			 * @example "MTH 141LEC - A1"
 			 * @example "TH 106 - JS"
 			 */
-			var classCode = data[`Class ${i}`];
+			var classCode = qData[`Class ${i}`];
 
 			/**
 			 * Array of RegEx matches on {@link classCode}.
@@ -79,4 +79,4 @@ export function validateFormData(data) {
 	if (numClassesFilled === 0) {
 		throw new ValidationError("Missing filled in classes");
 	}
-}
+};
