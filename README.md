@@ -1,36 +1,27 @@
-
 # Classmate Finder
 
 A tool to help you find and reach out to your classmates before classes start.
 Fill out your classes, invite all your friends to do the same, and then use this
-program to find everyone who shares a class with you!
+to find everyone who shares a class with you!
 
-[![Uptime Robot status](https://img.shields.io/uptimerobot/status/m788890606-364d23c122d34876075d6ca8)](https://stats.uptimerobot.com/Xq54DTnrkm)
-[![Uptime Robot ratio (7 days)](https://img.shields.io/uptimerobot/ratio/7/m788890606-364d23c122d34876075d6ca8?label=uptime%20%28week%29)](https://stats.uptimerobot.com/Xq54DTnrkm)
-[![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/m788890606-364d23c122d34876075d6ca8?label=uptime%20%28month%29)](https://stats.uptimerobot.com/Xq54DTnrkm)
-[![Total alerts](https://img.shields.io/lgtm/alerts/g/WeirdAlex03/Classmate-Finder.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/WeirdAlex03/Classmate-Finder/alerts/)
-[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/WeirdAlex03/Classmate-Finder.svg?logo=lgtm&logoWidth=18&label=code%20quality)](https://lgtm.com/projects/g/WeirdAlex03/Classmate-Finder/context:javascript)
+[![Uptime Robot status](https://img.shields.io/uptimerobot/status/m789025610-53137d7b9d889e54e4f02612)](https://stats.uptimerobot.com/Xq54DTnrkm)
+[![Uptime Robot ratio (7 days)](https://img.shields.io/uptimerobot/ratio/7/m789025610-53137d7b9d889e54e4f02612?label=uptime%20%28week%29)](https://stats.uptimerobot.com/Xq54DTnrkm)
+[![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/m789025610-53137d7b9d889e54e4f02612?label=uptime%20%28month%29)](https://stats.uptimerobot.com/Xq54DTnrkm)
+<!--[![Total alerts](https://img.shields.io/lgtm/alerts/g/WeirdAlex03/Classmate-Finder.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/WeirdAlex03/Classmate-Finder/alerts/)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/WeirdAlex03/Classmate-Finder.svg?logo=lgtm&logoWidth=18&label=code%20quality)](https://lgtm.com/projects/g/WeirdAlex03/Classmate-Finder/context:javascript)-->
 
 [![Discord](https://img.shields.io/discord/810735813621055509?color=7289da&label=Support%20Server&logo=discord&logoColor=fff)](https://discord.gg/72qa2YJZxY)
 
-## Usage
+Initially slated for a Fall 2021 launch, I encountered a significant problem
+that I couldn't overcome.
+Instead, I've decided to scrap the initial version and move on to what would
+have been the version 2.0.0 overhaul.
+This will release targetting the Spring 2022 semester.
+If you want to see the original source, look at the
+[0.1.0](https://github.com/WeirdAlex03/Classmate-Finder/releases/tag/0.1.0) release.
 
-This program has not yet been generalized for public use. I plan to make
-this more useable for the general public in an upcoming minor update and
-will provide more info then.
-
-## Installation
-
-I cannot currently reccommend that you duplicate this for your own use.
-I plan to make the process much easier in an upcoming minor update and
-will provide more info then.
-
-## Contributing
-
-While I appreciate feedback, I am not currently looking for help with
-development. Please reach out to me directly (WeirdAlex03#5049) or
-[join my Discord server](https://discord.gg/72qa2YJZxY) before
-starting any contributions.
+For more information about the current version, please go to
+<https://Classmate-Finder.weirdalex03.repl.co>
 
 ## License
 

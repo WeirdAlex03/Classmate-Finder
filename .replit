@@ -1,0 +1,2 @@
+language = "nodejs"
+run = "git pull --force; node index.js"

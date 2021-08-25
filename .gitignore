@@ -7,8 +7,5 @@ node_modules/
 # Environment Variables
 .env
 
-# Replit run instructions for DB server
-.replit
-
 # Replit debugger breakpoints
 .breakpoints
