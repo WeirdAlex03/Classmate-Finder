@@ -7,8 +7,6 @@ to find everyone who shares a class with you!
 [![Uptime Robot status](https://img.shields.io/uptimerobot/status/m789025610-53137d7b9d889e54e4f02612)](https://stats.uptimerobot.com/Xq54DTnrkm)
 [![Uptime Robot ratio (7 days)](https://img.shields.io/uptimerobot/ratio/7/m789025610-53137d7b9d889e54e4f02612?label=uptime%20%28week%29)](https://stats.uptimerobot.com/Xq54DTnrkm)
 [![Uptime Robot ratio (30 days)](https://img.shields.io/uptimerobot/ratio/m789025610-53137d7b9d889e54e4f02612?label=uptime%20%28month%29)](https://stats.uptimerobot.com/Xq54DTnrkm)
-<!--[![Total alerts](https://img.shields.io/lgtm/alerts/g/WeirdAlex03/Classmate-Finder.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/WeirdAlex03/Classmate-Finder/alerts/)
-[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/WeirdAlex03/Classmate-Finder.svg?logo=lgtm&logoWidth=18&label=code%20quality)](https://lgtm.com/projects/g/WeirdAlex03/Classmate-Finder/context:javascript)-->
 
 [![Discord](https://img.shields.io/discord/810735813621055509?color=7289da&label=Support%20Server&logo=discord&logoColor=fff)](https://discord.gg/72qa2YJZxY)
 
@@ -16,7 +14,7 @@ Initially slated for a Fall 2021 launch, I encountered a significant problem
 that I couldn't overcome.
 Instead, I've decided to scrap the initial version and move on to what would
 have been the version 2.0.0 overhaul.
-This will release targetting the Spring 2022 semester.
+This will release targeting the Spring 2022 semester.
 If you want to see the original source, look at the
 [0.1.0](https://github.com/WeirdAlex03/Classmate-Finder/releases/tag/0.1.0) release.
 
