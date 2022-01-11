@@ -9,3 +9,6 @@ node_modules/
 
 # Replit debugger breakpoints
 .breakpoints
+
+# TS Compliation
+out/
