@@ -1,6 +1,5 @@
 {
     "env": {
-        "commonjs": true,
         "es2021": true,
         "node": true
     },
@@ -9,23 +8,15 @@
         "ecmaVersion": 12,
         "sourceType": "module"
     },
+    "reportUnusedDisableDirectives": true,
     "rules": {
-        "consistent-return": "error",
-        "indent": [
+        "consistent-return": [
             "error",
-            "tab"
-        ],
-        "linebreak-style": [
-            "error",
-            "windows"
+            { "treatUndefinedAsUnspecified": true }
         ],
         "semi": [
             "error",
             "always"
-        ],
-        "comma-dangle": [
-            "error",
-            "only-multiline"
         ],
         "func-style": [
             "error",
@@ -50,26 +41,7 @@
                 "args": "none"
             }
         ],
-        "no-magic-numbers": [
-            "error",
-            {
-                "ignore": [
-                    // Common numbers
-                    0, 1,
-                    // Factors of 10
-                    10, 100, 1000, 10000, 100000, 1000000, 10000000,
-                    // Time units
-                    24, 60, 60000,
-                    // HTTP ports
-                    80, 8008, 8080,
-                    // Common HTTP response codes
-                    200, 201, 202, 400, 401, 403, 404, 500, 501, 503
-                ],
-                "ignoreArrayIndexes": true,
-                "ignoreDefaultValues": true
-            }
-        ],
-
+        
         "spaced-comment": "warn",
         "key-spacing": "warn",
         "no-multi-spaces": "warn",
@@ -79,8 +51,25 @@
         "keyword-spacing": "warn",
         "multiline-comment-style": "warn",
         "arrow-parens": "warn",
+        "prefer-const": "warn",
+        "eqeqeq": "warn",
+        "new-cap": "warn",
         "sort-vars": "warn",
+        "sort-imports": "warn",
+        "semi-spacing": "warn",
+        "comma-spacing": "warn",
         "eol-last": "warn",
+        "camelcase": [
+            "warn",
+            {
+                "ignoreImports": true,
+                "ignoreDestructuring": true
+            }
+        ],
+        "indent": [
+            "warn",
+            "tab"
+        ],
         "dot-location": [
             "warn",
             "property"
@@ -101,9 +90,9 @@
             "warn",
             "always-multiline"
         ],
-        "no-extra-parens": [
+        "comma-dangle": [
             "warn",
-            "all"
+            "only-multiline"
         ],
         "array-element-newline": [
             "warn",
@@ -113,6 +102,10 @@
             "warn",
             "never"
         ],
+        "object-shorthand"  : [
+            "warn",
+            "consistent-as-needed"
+        ],
         "newline-per-chained-call": [
             "warn",
             { "ignoreChainWithDepth": 3 }
@@ -120,10 +113,6 @@
         "array-bracket-newline": [
             "warn",
             { "multiline": true }
-        ],
-        "no-inline-comments": [
-            "warn",
-            { "ignorePattern": "lgtm|jshint" }
         ],
         "no-tabs": [
             "warn",
@@ -133,10 +122,15 @@
             "warn",
             { "ignoreComments": true }
         ],
+        "curly": [
+            "warn",
+            "multi-line",
+            "consistent"
+        ],
         "capitalized-comments": [
             "warn",
             "always",
-            { "ignorePattern": "lgtm" }
+            { "ignorePattern": "lgtm|cspell" }
         ],
         "brace-style": [
             "warn",
@@ -171,6 +165,9 @@
         "max-len": [
             "warn",
             {
+                "code": 120,
+                "comments": 80,
+                "tabWidth": 4,
                 "ignoreUrls": true,
                 "ignoreRegExpLiterals": true,
                 "ignoreTrailingComments": true
@@ -180,14 +177,14 @@
             "warn",
             {
                 "beforeBlockComment": true,
-                "beforeLineComment": true,
+                "beforeLineComment": false,
                 "allowBlockStart": true,
                 "allowClassStart": true,
                 "allowObjectStart": true,
                 "allowArrayStart": true
             }
         ],
-
+        
         "prefer-template": "off",
         "init-declarations": "off",
         "no-var": "off",
@@ -195,7 +192,8 @@
         "no-ternary": "off",
         "no-console": "off",
         "no-plusplus": "off",
-        "no-warning-comments": "off",
+        "no-inline-comments": "off",
+        "line-comment-position": "off",
         "object-property-newline": "off",
         "sort-keys": "off",
         "function-call-argument-newline": "off",
@@ -204,8 +202,10 @@
         "vars-on-top": "off",
         "max-statements": "off",
         "max-lines-per-function": "off",
+        "no-extra-parens": "off",
         "guard-for-in": "off",
-        "strict": "off"
-    },
-    "reportUnusedDisableDirectives": true
+        "strict": "off",
+        "linebreak-style": "off",
+        "no-magic-numbers": "off"
+    }
 }

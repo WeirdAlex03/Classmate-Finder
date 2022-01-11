@@ -1,2 +1,2 @@
 language = "nodejs"
-run = "git pull --force; tsc index.ts; node index.js"
+run = "git pull --force; npm start"

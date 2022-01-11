@@ -12,7 +12,9 @@
     "typescript": "^4.5.4"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "tsc -b",
+    "prestart": "npm run build",
+    "start": "node out/index.js"
   },
   "repository": {
     "type": "git",
