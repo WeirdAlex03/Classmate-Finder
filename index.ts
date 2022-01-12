@@ -5,7 +5,7 @@ createServer((req, res) => {
 	res.writeHead(200, { "Content-Type": "text/html" });
 
 	// Make sure path doesn't include ".html" extension, redirect if it does
-	const PATH = req.url.endsWith(".html") ? req.url.slice(0, -5) : req.url;
+	const PATH = !req.url ? "/" : req.url.endsWith(".html") ? req.url.slice(0, -5) : req.url;
 
 	if (PATH === "/") {
 		// If the request is for the root path, show coming soon
