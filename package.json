@@ -15,6 +15,7 @@
     "build": "tsc -b",
     "prestart": "npm run build",
     "start": "node out/index.js"
+    "lint": "eslint index.ts"
   },
   "repository": {
     "type": "git",
