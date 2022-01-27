@@ -16,7 +16,7 @@
   "scripts": {
     "build": "tsc -b",
     "prestart": "npm run build",
-    "start": "node out/index.js"
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",
