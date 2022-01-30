@@ -36,7 +36,11 @@ class MissingDataError extends ValidationError {
 function validateForm() {
     var _a;
     try {
-        validateFields();
+        const valid = validateFields();
+        if (valid) {
+            const form = document.getElementById("classes");
+            form.submit();
+        }
     }
     catch (err) {
         if (err instanceof MissingDataError) {
@@ -58,10 +62,13 @@ function validateForm() {
 /**
  * Validates the data in the form, calling sub-functions for each part
  *
+ * @returns {boolean} True if the form is valid, otherwise false w/ an error
+ *
  * @throws {ValidationError} if a field contains invalid data
  * @throws {MissingDataError} if a required field is empty
  */
 function validateFields() {
+    let valid = true;
     /** @type {HTMLCollectionOf<HTMLFieldSetElement>} */
     const fields = document.getElementsByTagName("fieldset");
     // Validate each fieldset
@@ -70,10 +77,22 @@ function validateFields() {
     for (const field of fields) {
         if (field.className === "nameField") {
             hasName = true;
-            validateName(fields.namedItem("name"));
+            try {
+                validateName(field);
+            }
+            catch (err) {
+                valid = false;
+                throw err;
+            }
         }
         else if (field.className === "classField") {
-            validateClass(field);
+            try {
+                validateClass(field);
+            }
+            catch (err) {
+                valid = false;
+                throw err;
+            }
         }
         else {
             hasClass = true;
@@ -81,11 +100,14 @@ function validateFields() {
         }
     }
     if (!hasName) {
+        valid = false;
         throw new ValidationError("Internal error: \"Identity\" fieldset is missing");
     }
     if (!hasClass) {
+        valid = false;
         throw new ValidationError("Internal error: No class fieldsets were found");
     }
+    return valid;
 }
 /**
  * Validates the name section

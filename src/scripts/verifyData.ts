@@ -41,7 +41,11 @@ class MissingDataError extends ValidationError {
 /* eslint-disable-next-line @typescript-eslint/no-unused-vars */
 function validateForm() {
 	try {
-		validateFields();
+		const valid = validateFields();
+		if (valid) {
+			const form = document.getElementById("classes") as HTMLFormElement;
+			form.submit();
+		}
 	} catch (err) {
 		if (err instanceof MissingDataError) {
 			alert(err.message);
@@ -61,10 +65,14 @@ function validateForm() {
 /**
  * Validates the data in the form, calling sub-functions for each part
  * 
+ * @returns {boolean} True if the form is valid, otherwise false w/ an error
+ * 
  * @throws {ValidationError} if a field contains invalid data
  * @throws {MissingDataError} if a required field is empty
  */
-function validateFields() {
+function validateFields(): boolean {
+
+	let valid = true;
 
 	/** @type {HTMLCollectionOf<HTMLFieldSetElement>} */
 	const fields = document.getElementsByTagName("fieldset");
@@ -74,9 +82,19 @@ function validateFields() {
 	for (const field of fields) {
 		if (field.className === "nameField") {
 			hasName = true;
-			validateName(fields.namedItem("name") as HTMLFieldSetElement);
+			try {
+				validateName(field as HTMLFieldSetElement);
+			} catch (err) {
+				valid = false;
+				throw err;
+			}
 		} else if (field.className === "classField") {
-			validateClass(field);
+			try {
+				validateClass(field);
+			} catch (err) {
+				valid = false;
+				throw err;
+			}
 		} else {
 			hasClass = true;
 			console.warn("Unknown fieldset class: " + field.className, field);
@@ -84,11 +102,15 @@ function validateFields() {
 	}
 
 	if (!hasName) {
+		valid = false;
 		throw new ValidationError("Internal error: \"Identity\" fieldset is missing");
 	}
 	if (!hasClass) {
+		valid = false;
 		throw new ValidationError("Internal error: No class fieldsets were found");
 	}
+
+	return valid;
 }
 
 /**
