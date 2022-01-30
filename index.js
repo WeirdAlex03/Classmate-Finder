@@ -2,6 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 const http_1 = require("http");
 const fs_1 = require("fs");
+const database_1 = require("./database/database");
 (0, http_1.createServer)((req, res) => {
     if (!req.url)
         return res.end((0, fs_1.readFileSync)("pages/comingSoon.html"));
@@ -62,10 +63,17 @@ const fs_1 = require("fs");
         }
         else if (req.method === "POST") {
             if (path.startsWith("database/")) {
-                // TEMP: Just console log the data for now
-                console.log(data);
-                res.writeHead(200, { "Content-Type": "text/plain" });
-                res.end("Data received, database not implemented yet");
+                try {
+                    (0, database_1.sendToDatabase)((0, database_1.convertFormEncodedToClass)(data));
+                    res.writeHead(200, { "Content-Type": "text/plain" });
+                    res.end("Success");
+                }
+                catch (err) {
+                    console.error(err);
+                    res.writeHead(500, { "Content-Type": "text/plain" });
+                    res.write("An error occurred while sending your data to the database");
+                    res.end("\n\n" + err);
+                }
             }
         }
         else {

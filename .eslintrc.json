@@ -88,7 +88,8 @@
         "eol-last": "warn",
         "indent": [
             "warn",
-            "tab"
+            "tab",
+            { "SwitchCase": 1 }
         ],
         "key-spacing": "warn",
         "keyword-spacing": "warn",

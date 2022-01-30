@@ -1,5 +1,6 @@
 import { createServer } from "http";
 import { existsSync, readFileSync } from "fs";
+import { convertFormEncodedToClass, sendToDatabase } from "./database/database";
 
 createServer((req, res) => {
 
@@ -61,10 +62,16 @@ createServer((req, res) => {
 			}
 		} else if (req.method === "POST") {
 			if (path.startsWith("database/")) {
-				// TEMP: Just console log the data for now
-				console.log(data);
-				res.writeHead(200, { "Content-Type": "text/plain" });
-				res.end("Data received, database not implemented yet");
+				try {
+					sendToDatabase(convertFormEncodedToClass(data));
+					res.writeHead(200, { "Content-Type": "text/plain" });
+					res.end("Success");
+				} catch (err) {
+					console.error(err);
+					res.writeHead(500, { "Content-Type": "text/plain" });
+					res.write("An error occurred while sending your data to the database");
+					res.end("\n\n" + err);
+				}
 			}
 		} else {
 			// If unrecognized method, show coming soon w/ 400
