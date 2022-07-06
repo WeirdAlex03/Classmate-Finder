@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8" />
+	<title>Classmate Finder: Coming Soon</title>
+	<script src="/scripts/verifyData.js"></script>
+</head>
+
+<body style="font-family: Arial, Helvetica, sans-serif">
+
+	<main>
+		<form id="classes" method="post" action="/database/saveClasses">
+			<fieldset id="identity" class="nameField">
+				<legend>Your Info</legend>
+				
+				<label for="name" title="Whatever you'd like to be called, this does not have to be your full/legal name. Giving a first and last name would be nice, but is not required">Name:</label>
+				<input type="text" name="name" id="name" placeholder="Name" required autofocus />
+
+				<label for="discord">Discord tag:</label>
+				<input type="text" name="discord" id="discord" placeholder="Discord tag" required />
+
+				<label for="password">Password:</label>
+				<input type="password" name="password" id="password" placeholder="Password" required />
+			</fieldset>
+			
+			<fieldset id="class1" class="classField">
+				<legend>Class 1</legend>
+
+				<label for="c1d">Department:</label>
+				<input name="c1d" id="c1d" type="text" placeholder="Department" required />
+
+				<label for="c1c">Course number:</label>
+				<input name="c1c" id="c1c" type="text" placeholder="Course number" required />
+
+				<label for="c1s">Lecture section:</label>
+				<input name="c1s" id="c1s" type="text" placeholder="Lecture section" />
+
+				<label for="c1l">Recitation/Lab section:</label>
+				<input name="c1l" id="c1l" type="text" placeholder="Recitation/Lab section" />
+			</fieldset>
+
+			<fieldset id="class2" class="classField">
+				<legend>Class 2</legend>
+
+				<label for="c2d">Department:</label>
+				<input name="c2d" id="c2d" type="text" placeholder="Department" />
+
+				<label for="c2c">Course number:</label>
+				<input name="c2c" id="c2c" type="text" placeholder="Course number" />
+
+				<label for="c2s">Lecture section:</label>
+				<input name="c2s" id="c2s" type="text" placeholder="Lecture section" />
+
+				<label for="c2l">Recitation/Lab section:</label>
+				<input name="c2l" id="c2l" type="text" placeholder="Recitation/Lab section" />
+			</fieldset>
+
+			<fieldset id="class3" class="classField">
+				<legend>Class 3</legend>
+
+				<label for="c3d">Department:</label>
+				<input name="c3d" id="c3d" type="text" placeholder="Department" />
+
+				<label for="c3c">Course number:</label>
+				<input name="c3c" id="c3c" type="text" placeholder="Course number" />
+
+				<label for="c3s">Lecture section:</label>
+				<input name="c3s" id="c3s" type="text" placeholder="Lecture section" />
+
+				<label for="c3l">Recitation/Lab section:</label>
+				<input name="c3l" id="c3l" type="text" placeholder="Recitation/Lab section" />
+			</fieldset>
+
+			<fieldset id="class4" class="classField">
+				<legend>Class 4</legend>
+
+				<label for="c4d">Department:</label>
+				<input name="c4d" id="c4d" type="text" placeholder="Department" />
+
+				<label for="c4c">Course number:</label>
+				<input name="c4c" id="c4c" type="text" placeholder="Course number" />
+
+				<label for="c4s">Lecture section:</label>
+				<input name="c4s" id="c4s" type="text" placeholder="Lecture section" />
+
+				<label for="c4l">Recitation/Lab section:</label>
+				<input name="c4l" id="c4l" type="text" placeholder="Recitation/Lab section" />
+			</fieldset>
+
+			<fieldset id="class5" class="classField">
+				<legend>Class 5</legend>
+
+				<label for="c5d">Department:</label>
+				<input name="c5d" id="c5d" type="text" placeholder="Department" />
+
+				<label for="c5c">Course number:</label>
+				<input name="c5c" id="c5c" type="text" placeholder="Course number" />
+
+				<label for="c5s">Lecture section:</label>
+				<input name="c5s" id="c5s" type="text" placeholder="Lecture section" />
+
+				<label for="c5l">Recitation/Lab section:</label>
+				<input name="c5l" id="c5l" type="text" placeholder="Recitation/Lab section" />
+			</fieldset>
+
+			<fieldset id="class6" class="classField">
+				<legend>Class 6</legend>
+
+				<label for="c6d">Department:</label>
+				<input name="c6d" id="c6d" type="text" placeholder="Department" />
+
+				<label for="c6c">Course number:</label>
+				<input name="c6c" id="c6c" type="text" placeholder="Course number" />
+
+				<label for="c6s">Lecture section:</label>
+				<input name="c6s" id="c6s" type="text" placeholder="Lecture section" />
+
+				<label for="c6l">Recitation/Lab section:</label>
+				<input name="c6l" id="c6l" type="text" placeholder="Recitation/Lab section" />
+			</fieldset>
+
+			<fieldset id="class7" class="classField">
+				<legend>Class 7</legend>
+
+				<label for="c7d">Department:</label>
+				<input name="c7d" id="c7d" type="text" placeholder="Department" />
+
+				<label for="c7c">Course number:</label>
+				<input name="c7c" id="c7c" type="text" placeholder="Course number" />
+
+				<label for="c7s">Lecture section:</label>
+				<input name="c7s" id="c7s" type="text" placeholder="Lecture section" />
+
+				<label for="c7l">Recitation/Lab section:</label>
+				<input name="c7l" id="c7l" type="text" placeholder="Recitation/Lab section" />
+			</fieldset>
+
+			<fieldset id="class8" class="classField">
+				<legend>Class 8</legend>
+
+				<label for="c8d">Department:</label>
+				<input name="c8d" id="c8d" type="text" placeholder="Department" />
+
+				<label for="c8c">Course number:</label>
+				<input name="c8c" id="c8c" type="text" placeholder="Course number" />
+
+				<label for="c8s">Lecture section:</label>
+				<input name="c8s" id="c8s" type="text" placeholder="Lecture section" />
+
+				<label for="c8l">Recitation/Lab section:</label>
+				<input name="c8l" id="c8l" type="text" placeholder="Recitation/Lab section" />
+			</fieldset>
+
+			<fieldset id="class9" class="classField">
+				<legend>Class 9</legend>
+
+				<label for="c9d">Department:</label>
+				<input name="c9d" id="c9d" type="text" placeholder="Department" />
+
+				<label for="c9c">Course number:</label>
+				<input name="c9c" id="c9c" type="text" placeholder="Course number" />
+
+				<label for="c9s">Lecture section:</label>
+				<input name="c9s" id="c9s" type="text" placeholder="Lecture section" />
+
+				<label for="c9l">Recitation/Lab section:</label>
+				<input name="c9l" id="c9l" type="text" placeholder="Recitation/Lab section" />
+			</fieldset>
+
+			<fieldset id="class10" class="classField">
+				<legend>Class 10</legend>
+
+				<label for="c10d">Department:</label>
+				<input name="c10d" id="c10d" type="text" placeholder="Department" />
+
+				<label for="c10c">Course number:</label>
+				<input name="c10c" id="c10c" type="text" placeholder="Course number" />
+
+				<label for="c10s">Lecture section:</label>
+				<input name="c10s" id="c10s" type="text" placeholder="Lecture section" />
+
+				<label for="c10l">Recitation/Lab section:</label>
+				<input name="c10l" id="c10l" type="text" placeholder="Recitation/Lab section" />
+			</fieldset>
+
+			<input type="submit" value="Submit" onclick="validateForm()" />
+
+
+		</form>
+
+	</main>
+	
+</body>
