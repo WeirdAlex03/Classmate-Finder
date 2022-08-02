@@ -16,7 +16,8 @@
   "scripts": {
     "build": "tsc -b",
     "prestart": "npm run build",
-    "start": "node index.js"
+    "start": "node index.js",
+    "lint": "eslint src/ --fix"
   },
   "repository": {
     "type": "git",
